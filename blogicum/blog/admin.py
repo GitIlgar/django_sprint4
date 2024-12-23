@@ -1,42 +1,40 @@
 from django.contrib import admin
 
-from .models import Category, Location, Post, Comment
-
-
-@admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
-    list_display = (
-        'title',
-        'is_published',
-        'slug',
-        'description',
-        'created_at',
-    )
-    list_editable = (
-        'is_published',
-    )
-    search_fields = ('title',)
-    list_filter = ('is_published',)
-    list_display_links = ('title',)
+from .models import Category, Comment, Location, Post
 
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-    list_display = (
-        'name',
-        'is_published',
-        'created_at',
-    )
-    list_editable = (
-        'is_published',
-    )
+    """Админка для локаций."""
+
+    list_display = ('name', 'created_at')
     search_fields = ('name',)
-    list_filter = ('is_published',)
-    list_display_links = ('name',)
+    list_filter = ('created_at',)
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    """Админка для категорий."""
+
+    list_display = ('title', 'is_published', 'created_at')
+    list_editable = ('is_published',)
+    search_fields = ('title',)
+    list_filter = ('is_published', 'created_at')
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    """Админка для комментариев."""
+
+    list_display = ('author', 'post', 'text', 'created_at')
+    search_fields = ('author__username', 'post__title', 'text')
+    list_filter = ('created_at', 'post')
 
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
+    """Админка для постов."""
+
     list_display = (
         'title',
         'is_published',
@@ -52,18 +50,5 @@ class PostAdmin(admin.ModelAdmin):
         'category'
     )
     search_fields = ('title',)
-    list_filter = ('category', 'is_published',)
+    list_filter = ('category', 'is_published', 'pub_date',)
     list_display_links = ('title',)
-
-
-@admin.register(Comment)
-class CommentAdmin(admin.ModelAdmin):
-    list_display = (
-        'text',
-        'post',
-        'created_at',
-        'author'
-    )
-
-
-admin.site.empty_value_display = 'Не задано'

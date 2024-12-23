@@ -1,10 +1,25 @@
-# Проект "Blogicum" от [Яндекс практикум](https://practicum.yandex.ru/)
+# Blogicum
+Проект Blogicum - платформа для ведения блогов.
 
-## Описание
-Проект Blogicum от Яндекс практикума
+Установка
+Клонируйте проект из гитхаба:
 
-## Рассмотренные технологии:
-* Django templates
-* Django routes
-* Django ORM
-* Django forms
+git clone git@github.com:SlavaSerdyukov/django_sprint4.git
+Создайте и активируйте виртуальное окружение:
+
+python -m venv venv
+source venv/Scripts/activate
+Установите зависимости из файла requirements.txt:
+
+pip install -r requirements.txt
+Перейдите в каталог с файлом manage.py, примените миграции:
+
+cd blogicum
+python manage.py migrate
+Запустите сервер:
+
+python manage.py runserver
+Об авторе
+Python-разработчик
+
+Сердюков Вячеслав
